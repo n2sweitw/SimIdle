@@ -11,19 +11,22 @@ import SwiftUI
 
 struct IdleSpaceView: View {
     private var onOrbTap: (() -> Void)?
+    @ObservedObject var colorStore: ColorStore
 
-    init() {}
+    init(colorStore: ColorStore) {
+        self.colorStore = colorStore
+    }
 
     var body: some View {
         ZStack {
             background
-            OrbView(orbColor: Color("circleColor"), onTap: onOrbTap)
+            OrbView(orbColor: colorStore.orbColor, onTap: onOrbTap)
         }
         .ignoresSafeArea()
     }
 
     var background: some View {
-        Color("backgroundColor")
+        colorStore.spaceColor
             .ignoresSafeArea()
             .allowsHitTesting(false)
     }
@@ -38,5 +41,7 @@ extension IdleSpaceView {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    IdleSpaceView()
+    IdleSpaceView(
+        colorStore: ColorStore()
+    )
 }

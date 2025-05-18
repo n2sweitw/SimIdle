@@ -12,6 +12,7 @@ import Combine
 
 public struct ExperienceView: View {
     private let receivedColorElementSet: String?
+    @StateObject private var colorStore: ColorStore = .init()
     private var onColorUpdate: ((String) -> Void)?
     private var onBackgroundTap: (() -> Void)?
 
@@ -31,7 +32,7 @@ public struct ExperienceView: View {
 
     private var background: some View {
         Rectangle()
-            .fill(Color("backgroundColor"))
+            .fill(colorStore.spaceColor)
             .ignoresSafeArea()
             .onTapGesture {
                 onBackgroundTap?()
@@ -40,7 +41,7 @@ public struct ExperienceView: View {
 
     @ViewBuilder
     private var content: some View {
-        IdleSpaceView()
+        IdleSpaceView(colorStore: colorStore)
             .transition(.opacity)
     }
 }
