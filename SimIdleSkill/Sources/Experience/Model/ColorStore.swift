@@ -63,7 +63,7 @@ class ColorStore: ObservableObject {
         }
     }
 
-    private let maxPallets = 5
+    let maxPallets = 5
 
     @Published var colorPallets: [ColorPallet] = []
 

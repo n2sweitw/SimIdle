@@ -13,6 +13,7 @@ import Combine
 public struct ExperienceView: View {
     private let receivedColorElementSet: String?
     @StateObject private var colorStore: ColorStore = .init()
+    @State private var currentSkill: ExperienceSkill = .idleSpace
     private var onColorUpdate: ((String) -> Void)?
     private var onBackgroundTap: (() -> Void)?
 
@@ -24,6 +25,7 @@ public struct ExperienceView: View {
         ZStack {
             background
             content
+                .animation(.easeInOut(duration: 0.3), value: currentSkill)
             VStack {
                 Spacer()
             }
@@ -41,8 +43,19 @@ public struct ExperienceView: View {
 
     @ViewBuilder
     private var content: some View {
-        IdleSpaceView(colorStore: colorStore)
-            .transition(.opacity)
+        switch currentSkill {
+        case .idleSpace:
+            IdleSpaceView(colorStore: colorStore)
+                .onOrbTap {
+                    withAnimation(.easeIn(duration: 0.3)) {
+                        currentSkill = .colorSelection
+                    }
+                }
+                .transition(.opacity)
+        case .colorSelection:
+            ColorSelectionView(currentSkill: $currentSkill, colorStore: colorStore)
+                .transition(.opacity)
+        }
     }
 }
 
