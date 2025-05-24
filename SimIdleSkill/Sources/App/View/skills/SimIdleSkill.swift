@@ -11,6 +11,7 @@ import Foundation
 /// Available skills in the SimIdle application
 enum SimIdleSkill: String, Equatable, HistoryElement, Skill {
     case experience
+    case share
 
     var id: String {
         rawValue

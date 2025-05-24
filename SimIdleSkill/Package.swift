@@ -22,11 +22,14 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "SimIdleApp",
-            dependencies: ["SimIdleExperience"],
+            dependencies: ["SimIdleExperience", "SimIdleShare"],
             path: "Sources/App"),
         .target(
             name: "SimIdleExperience",
             path: "Sources/Experience"),
+        .target(
+            name: "SimIdleShare",
+            path: "Sources/Share"),
         .testTarget(
             name: "SimIdleExperienceTests",
             dependencies: ["SimIdleExperience"],

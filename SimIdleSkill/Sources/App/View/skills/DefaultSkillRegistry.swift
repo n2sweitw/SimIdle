@@ -9,12 +9,14 @@
 
 import SwiftUI
 import SimIdleExperience
+import SimIdleShare
 
 struct DefaultSkillRegistry: SkillRegistry {
     typealias SkillType = SimIdleSkill
     
     let supportedSkillIds: [String] = [
-        ExperienceSkillView.skillId
+        ExperienceSkillView.skillId,
+        ShareSkillView.skillId
     ]
     
     init() {
@@ -32,6 +34,15 @@ struct DefaultSkillRegistry: SkillRegistry {
         case .experience:
             return AnyView(
                 ExperienceSkillView(store: store)
+                    .configureNavigation(
+                        onStoreUpdate: onStoreUpdate,
+                        onNavigate: onNavigate,
+                        onBack: onBack
+                    )
+            )
+        case .share:
+            return AnyView(
+                ShareSkillView(store: store)
                     .configureNavigation(
                         onStoreUpdate: onStoreUpdate,
                         onNavigate: onNavigate,
