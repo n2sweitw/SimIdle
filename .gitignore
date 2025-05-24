@@ -1,0 +1,59 @@
+# Xcode
+DerivedData/
+build/
+*.xcuserstate
+
+# Swift Package Manager
+.build/
+Package.resolved
+Packages/
+.swiftpm/
+
+# Xcode project files
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+xcuserdata/
+
+# Playground files
+timeline.xctimeline
+playground.xcworkspace/
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/Build/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/
+
+# Archives
+*.xcarchive
+
+# App Data
+*.moved-aside
+*.xcuserstate
+*.xcodeproj/*.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+
+# SwiftPM Xcode integration
+.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/
+
+# Others
+*.swp
+*.swo
+*.DS_Store
+
+# Firebase
+GoogleService-Info.plist
+
+# dotenv
+.env
+
+# claude
+**/.claude/settings.local.json
