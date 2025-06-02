@@ -28,6 +28,9 @@ public struct ExperienceView: View {
                 .animation(.easeInOut(duration: 0.3), value: currentSkill)
             VStack {
                 Spacer()
+                if currentSkill == .idleSpace {
+                    colorPallet
+                }
             }
         }
     }
@@ -56,6 +59,12 @@ public struct ExperienceView: View {
             ColorSelectionView(currentSkill: $currentSkill, colorStore: colorStore)
                 .transition(.opacity)
         }
+    }
+
+    private var colorPallet: some View {
+        ColorPalletView(
+            colorStore: colorStore
+        )
     }
 }
 
