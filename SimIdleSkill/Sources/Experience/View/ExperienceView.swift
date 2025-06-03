@@ -33,6 +33,13 @@ public struct ExperienceView: View {
                 }
             }
         }
+        .onReceive(colorStore.$colorPallets) { pallets in
+            let colorElementSet = ColorElementSet(elements: pallets.map { ColorElement(orbHexCode: $0.orbHexCode, spaceHexCode: $0.spaceHexCode) })
+            onColorUpdate?(colorElementSet.stringRepresentation)
+        }
+        .onAppear {
+            updatePaletteIfNeeded()
+        }
     }
 
     private var background: some View {
@@ -65,6 +72,22 @@ public struct ExperienceView: View {
         ColorPalletView(
             colorStore: colorStore
         )
+    }
+
+    private func updatePaletteIfNeeded() {
+        guard let receivedColorElementSet = receivedColorElementSet,
+              !receivedColorElementSet.isEmpty else { return }
+        
+        let currentColorElementSet = ColorElementSet(elements: colorStore.colorPallets.map { ColorElement(orbHexCode: $0.orbHexCode, spaceHexCode: $0.spaceHexCode) })
+        
+        if currentColorElementSet.stringRepresentation != receivedColorElementSet {
+            updatePalette(from: receivedColorElementSet)
+        }
+    }
+    
+    private func updatePalette(from colorElementSet: String) {
+        let colorElementSetParsed = ColorElementSet(from: colorElementSet)
+        colorStore.colorPallets = colorElementSetParsed.elements.map { ColorStore.ColorPallet(element: $0) }
     }
 }
 
