@@ -26,6 +26,12 @@ struct ColorElementSet: Sendable, Equatable {
             .joined()
     }
     
+    static func colorCodesString(from elements: [ColorElement]) -> String {
+        elements
+            .map { $0.orbHexCode.replacingOccurrences(of: "#", with: "") + $0.spaceHexCode.replacingOccurrences(of: "#", with: "") }
+            .joined()
+    }
+    
     private static func parseColorElementSet(_ colorElementSet: String) -> [ColorElement] {
         let colorCodeLength = 12 // 6 chars for orb + 6 chars for space
         var elements: [ColorElement] = []

@@ -51,18 +51,12 @@ public struct ShareView: View {
     }
     
     private var colorShareView: some View {
-        ZStack {
-            // Background with space color
-            Rectangle()
-                .fill(currentElement.spaceColor)
-                .ignoresSafeArea()
-            
-            // Orb in the center
-            Circle()
-                .fill(currentElement.orbColor)
-                .frame(width: 80, height: 80)
-        }
-        .onTapGesture {
+        ColorSharingView(
+            elements: colorElementSet.elements,
+            textColor: currentElement.orbColor,
+            backgroundColor: currentElement.spaceColor
+        )
+        .onComplete {
             currentSkill = .menu
         }
     }
