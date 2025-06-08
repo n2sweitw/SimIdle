@@ -15,7 +15,7 @@ public struct ShareView: View {
     @State private var colorElementSet: ColorElementSet
     private var onComplete: (() -> Void)?
     private var onColorElementSetUpdate: ((String) -> Void)?
-
+    
     public init(
         colorElementSet: String
     ) {
@@ -46,7 +46,7 @@ public struct ShareView: View {
         case .colorSharing:
             colorShareView
         case .colorReceiving:
-            EmptyView()
+            colorReceivingView
         }
     }
     
@@ -60,6 +60,31 @@ public struct ShareView: View {
             currentSkill = .menu
         }
     }
+    
+    private var colorReceivingView: some View {
+        ColorReceivingView(
+            textColor: currentElement.orbColor,
+            backgroundColor: currentElement.spaceColor,
+            allElements: colorElementSet.elements,
+            pasteboardReader: PasteboardReader()
+        )
+        .onImport { importedColorElementSet in
+            updateColorElementSet(from: importedColorElementSet)
+        }
+        .onCompletion {
+            onComplete?()
+        }
+    }
+    
+    
+    private func updateColorElementSet(from colorElementSetString: String) {
+        let newColorElementSet = ColorElementSet(from: colorElementSetString)
+        self.colorElementSet = newColorElementSet
+        if let firstElement = newColorElementSet.elements.first {
+            self.currentElement = firstElement
+        }
+        onColorElementSetUpdate?(colorElementSetString)
+    }
 }
 
 public extension ShareView {
@@ -68,7 +93,7 @@ public extension ShareView {
         view.onComplete = action
         return view
     }
-    
+
     func onColorElementSetUpdate(_ action: @escaping (String) -> Void) -> ShareView {
         var view = self
         view.onColorElementSetUpdate = action

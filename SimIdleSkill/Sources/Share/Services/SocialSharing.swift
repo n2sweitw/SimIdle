@@ -18,3 +18,14 @@ protocol SocialSharing {
 protocol PasteboardCopying {
     @MainActor func copyColorCodes(_ elements: [ColorElement])
 }
+
+/// Protocol for reading color codes from pasteboard
+protocol PasteboardReading {
+    func readColorCodes() -> PasteboardParseResult
+}
+
+/// Result of parsing clipboard content
+enum PasteboardParseResult: Equatable {
+    case success([ColorElement])
+    case error(String)
+}
