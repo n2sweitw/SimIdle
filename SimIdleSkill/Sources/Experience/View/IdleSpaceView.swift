@@ -9,12 +9,12 @@
 
 import SwiftUI
 
-public struct IdleSpaceView: View {
+struct IdleSpaceView: View {
     private var onOrbTap: (() -> Void)?
 
-    public init() {}
+    init() {}
 
-    public var body: some View {
+    var body: some View {
         ZStack {
             background
             OrbView(orbColor: Color("circleColor"), onTap: onOrbTap)

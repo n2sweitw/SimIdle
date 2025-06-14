@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SimIdleApp
 
 @main
 struct SimIdleApp: App {

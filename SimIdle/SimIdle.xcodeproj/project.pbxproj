@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		334036972DC9AE1B001B7E49 /* SimIdleExperience in Frameworks */ = {isa = PBXBuildFile; productRef = 334036962DC9AE1B001B7E49 /* SimIdleExperience */; };
+		33B5986F2DFD022500FE0DD5 /* SimIdleApp in Frameworks */ = {isa = PBXBuildFile; productRef = 33B5986E2DFD022500FE0DD5 /* SimIdleApp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,7 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				334036972DC9AE1B001B7E49 /* SimIdleExperience in Frameworks */,
+				33B5986F2DFD022500FE0DD5 /* SimIdleApp in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,7 +148,7 @@
 			);
 			name = SimIdle;
 			packageProductDependencies = (
-				334036962DC9AE1B001B7E49 /* SimIdleExperience */,
+				33B5986E2DFD022500FE0DD5 /* SimIdleApp */,
 			);
 			productName = SimIdle;
 			productReference = 331E938E2DC89ECB001BBC7C /* SimIdle.app */;
@@ -587,9 +587,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		334036962DC9AE1B001B7E49 /* SimIdleExperience */ = {
+		33B5986E2DFD022500FE0DD5 /* SimIdleApp */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = SimIdleExperience;
+			productName = SimIdleApp;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
