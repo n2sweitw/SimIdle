@@ -46,9 +46,17 @@ public struct ExperienceView: View {
         Rectangle()
             .fill(colorStore.spaceColor)
             .ignoresSafeArea()
-            .onTapGesture {
-                onBackgroundTap?()
-            }
+            .contentShape(Rectangle())
+            .multiTapGesture(
+                onSingleTap: {
+                    onBackgroundTap?()
+                },
+                onTwoFingerTap: {
+                    withAnimation(.easeIn(duration: 0.3)) {
+                        currentSkill = .help
+                    }
+                }
+            )
     }
 
     @ViewBuilder
@@ -65,6 +73,17 @@ public struct ExperienceView: View {
         case .colorSelection:
             ColorSelectionView(currentSkill: $currentSkill, colorStore: colorStore)
                 .transition(.opacity)
+        case .help:
+            HelpView(
+                onDismiss: {
+                    withAnimation(.easeIn(duration: 0.3)) {
+                        currentSkill = .idleSpace
+                    }
+                },
+                orbColor: colorStore.orbColor,
+                spaceColor: colorStore.spaceColor
+            )
+            .transition(.opacity)
         }
     }
 

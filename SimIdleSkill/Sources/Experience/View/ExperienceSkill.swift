@@ -13,4 +13,5 @@ import Foundation
 enum ExperienceSkill: Equatable {
     case idleSpace
     case colorSelection
+    case help
 }
