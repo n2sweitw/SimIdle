@@ -35,5 +35,10 @@ let package = Package(
             dependencies: ["SimIdleExperience"],
             path: "Tests/ExperienceTests"
         ),
+        .testTarget(
+            name: "SimIdleShareTests",
+            dependencies: ["SimIdleShare"],
+            path: "Tests/ShareTests"
+        ),
     ]
 )
