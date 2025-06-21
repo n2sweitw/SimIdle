@@ -11,6 +11,7 @@ import Foundation
 
 /// Available skills within the Experience module
 enum ExperienceSkill: Equatable {
+    case welcome
     case idleSpace
     case colorSelection
     case help

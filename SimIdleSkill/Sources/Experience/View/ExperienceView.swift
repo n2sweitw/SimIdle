@@ -13,6 +13,7 @@ import Combine
 public struct ExperienceView: View {
     private let receivedColorElementSet: String?
     @StateObject private var colorStore: ColorStore = .init()
+    @AppStorage("hasCompletedWelcome") private var hasCompletedWelcome: Bool = false
     @State private var currentSkill: ExperienceSkill = .idleSpace
     private var onColorUpdate: ((String) -> Void)?
     private var onBackgroundTap: (() -> Void)?
@@ -38,6 +39,9 @@ public struct ExperienceView: View {
             onColorUpdate?(colorElementSet.stringRepresentation)
         }
         .onAppear {
+            if !hasCompletedWelcome {
+                currentSkill = .welcome
+            }
             updatePaletteIfNeeded()
         }
     }
@@ -62,6 +66,17 @@ public struct ExperienceView: View {
     @ViewBuilder
     private var content: some View {
         switch currentSkill {
+        case .welcome:
+            WelcomeView(
+                onDismiss: {
+                    withAnimation(.easeIn(duration: 0.3)) {
+                        currentSkill = .idleSpace
+                    }
+                },
+                orbColor: colorStore.orbColor,
+                spaceColor: colorStore.spaceColor
+            )
+            .transition(.opacity)
         case .idleSpace:
             IdleSpaceView(colorStore: colorStore)
                 .onOrbTap {
