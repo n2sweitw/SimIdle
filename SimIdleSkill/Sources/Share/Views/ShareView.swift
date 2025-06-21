@@ -27,8 +27,26 @@ public struct ShareView: View {
     }
     
     public var body: some View {
-        contentView
-            .animation(.easeInOut(duration: 0.3), value: currentSkill)
+        ZStack {
+            backgroundView
+            
+            contentView
+                .animation(.easeInOut(duration: 0.3), value: currentSkill)
+        }
+    }
+    
+    private var backgroundView: some View {
+        Rectangle()
+            .fill(currentElement.spaceColor)
+            .ignoresSafeArea()
+            .contentShape(Rectangle())
+            .multiTapGesture(onSingleTap: {
+                onComplete?()
+            }, onTwoFingerTap: {
+                if currentSkill != .help {
+                    currentSkill = .help
+                }
+            })
     }
     
     @ViewBuilder
@@ -38,15 +56,14 @@ public struct ShareView: View {
             MenuView(
                 currentView: $currentSkill,
                 orbColor: currentElement.orbColor,
-                backgroundColor: currentElement.spaceColor,
-                onComplete: {
-                    onComplete?()
-                }
+                backgroundColor: currentElement.spaceColor
             )
         case .colorSharing:
             colorShareView
         case .colorReceiving:
             colorReceivingView
+        case .help:
+            helpView
         }
     }
     
@@ -74,6 +91,16 @@ public struct ShareView: View {
         .onCompletion {
             onComplete?()
         }
+    }
+    
+    private var helpView: some View {
+        HelpView(
+            onDismiss: {
+                currentSkill = .menu
+            },
+            orbColor: currentElement.orbColor,
+            spaceColor: currentElement.spaceColor
+        )
     }
     
     

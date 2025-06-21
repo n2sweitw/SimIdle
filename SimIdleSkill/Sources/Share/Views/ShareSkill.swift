@@ -14,4 +14,5 @@ enum ShareSkill: Equatable {
     case menu
     case colorSharing
     case colorReceiving
+    case help
 }

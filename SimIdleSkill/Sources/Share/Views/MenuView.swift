@@ -13,13 +13,11 @@ struct MenuView: View {
     @Binding private var currentSkill: ShareSkill
     private let orbColor: Color
     private let backgroundColor: Color
-    private let onComplete: (() -> Void)?
     
-    init(currentView: Binding<ShareSkill>, orbColor: Color, backgroundColor: Color, onComplete: (() -> Void)? = nil) {
+    init(currentView: Binding<ShareSkill>, orbColor: Color, backgroundColor: Color) {
         self._currentSkill = currentView
         self.orbColor = orbColor
         self.backgroundColor = backgroundColor
-        self.onComplete = onComplete
     }
     
     public var body: some View {
@@ -52,10 +50,7 @@ struct MenuView: View {
     var background: some View {
         backgroundColor
             .ignoresSafeArea()
-            .contentShape(Rectangle())
-            .onTapGesture {
-                onComplete?()
-            }
+            .allowsHitTesting(false)
     }
 }
 
